@@ -2,11 +2,13 @@ import { useState } from "react";
 
 import { Button } from "react-bootstrap";
 
-import Header from "./components/Header";
-import ModalContainer from "./components/ModalContainer";
+import Header from "./Header";
+import ModalContainer from "./ModalContainer";
+import BookList from "./BookList";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [books, setBooks] = useState([]);
 
   function openModal() {
     setShowModal(true);
@@ -14,6 +16,10 @@ function App() {
 
   function closeModal() {
     setShowModal(false);
+  }
+
+  function addBook(book) {
+    setBooks(book);
   }
 
   return (
@@ -25,9 +31,14 @@ function App() {
             <Button variant="primary" onClick={openModal}>
               Add book
             </Button>
-            <ModalContainer show={showModal} closeModal={closeModal} />
+            <ModalContainer
+              show={showModal}
+              closeModal={closeModal}
+              addBook={addBook}
+            />
           </div>
         </div>
+        <BookList books={books} />
       </div>
     </div>
   );
