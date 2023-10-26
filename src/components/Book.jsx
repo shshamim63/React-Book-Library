@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDice, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Stack } from "react-bootstrap";
+
 const Book = ({ book }) => {
   return (
     <tr
@@ -17,12 +21,14 @@ const Book = ({ book }) => {
       <td>{book.pages}</td>
       <td>{book.status}</td>
       <td>
-        <button type="button" className="btn btn-sm btn-warning statusbtn">
-          <i className="bi bi-dice-4-fill"></i> Change status
-        </button>
-        <button type="button" className="btn btn-sm btn-danger deletebtn">
-          <i className="bi bi-trash3"></i>
-        </button>
+        <Stack direction="horizontal" gap={1}>
+          <button type="button" className="btn btn-sm btn-warning">
+            <FontAwesomeIcon icon={faDice} /> Change status
+          </button>
+          <button type="button" className="btn btn-sm btn-danger deletebtn">
+            <FontAwesomeIcon icon={faTrashCan} />
+          </button>
+        </Stack>
       </td>
     </tr>
   );

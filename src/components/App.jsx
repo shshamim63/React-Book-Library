@@ -8,7 +8,15 @@ import BookList from "./BookList";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([
+    {
+      id: 1,
+      title: "demo title",
+      author: "demo-author",
+      pages: 30,
+      status: 1,
+    },
+  ]);
 
   function openModal() {
     setShowModal(true);

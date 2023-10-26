@@ -1,8 +1,8 @@
 const BookTableHead = () => {
   return (
-    <thead className="thread-dark">
+    <thead className="thread-dark p-1">
       <tr>
-        <th scope="col">Book ID</th>
+        <th scope="col text-center">Book ID</th>
         <th scope="col">Title</th>
         <th scope="col">Author</th>
         <th scope="col">Pages</th>
