@@ -1,22 +1,15 @@
 import { useState } from "react";
-
 import { Button } from "react-bootstrap";
+
+import { useSelector } from "react-redux";
 
 import Header from "./Header";
 import ModalContainer from "./ModalContainer";
 import BookList from "./BookList";
 
 function App() {
+  const books = useSelector((state) => state.books.bookList);
   const [showModal, setShowModal] = useState(false);
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "demo title",
-      author: "demo-author",
-      pages: 30,
-      status: 1,
-    },
-  ]);
 
   function openModal() {
     setShowModal(true);
@@ -24,10 +17,6 @@ function App() {
 
   function closeModal() {
     setShowModal(false);
-  }
-
-  function addBook(book) {
-    setBooks(book);
   }
 
   return (
@@ -39,11 +28,7 @@ function App() {
             <Button variant="primary" onClick={openModal}>
               Add book
             </Button>
-            <ModalContainer
-              show={showModal}
-              closeModal={closeModal}
-              addBook={addBook}
-            />
+            <ModalContainer show={showModal} closeModal={closeModal} />
           </div>
         </div>
         <BookList books={books} />
