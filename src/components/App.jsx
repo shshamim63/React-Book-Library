@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-
-import { useSelector } from "react-redux";
 
 import Header from "./Header";
 import ModalContainer from "./ModalContainer";
-import BookList from "./BookList";
+import BookList from "../features/books/BookList";
+import { useDispatch } from "react-redux";
+import { load } from "../features/books/BookSlice";
 
 function App() {
-  const books = useSelector((state) => state.books.bookList);
   const [showModal, setShowModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   function openModal() {
     setShowModal(true);
@@ -18,6 +19,10 @@ function App() {
   function closeModal() {
     setShowModal(false);
   }
+
+  useEffect(() => {
+    dispatch(load());
+  }, [dispatch]);
 
   return (
     <div className="main-container">
@@ -31,7 +36,7 @@ function App() {
             <ModalContainer show={showModal} closeModal={closeModal} />
           </div>
         </div>
-        <BookList books={books} />
+        <BookList />
       </div>
     </div>
   );

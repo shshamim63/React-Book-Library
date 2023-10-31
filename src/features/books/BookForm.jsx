@@ -2,22 +2,22 @@ import PropTypes from "prop-types";
 
 import { Form } from "react-bootstrap";
 
-import { BOOK_SELECT_OPTION } from "../utils/books";
+import { BOOK_STATUS } from "../../utils/books";
 
-const BookForm = ({ onHandleSubmit, dispatch }) => {
+const BookForm = ({ onHandleSubmit, dispatch, state }) => {
   function handleTextChange(e) {
-    console.log(e.target.value);
     dispatch({
       type: "HANDLE_INPUT_TEXT",
-      filed: e.target.name,
-      payload: e.target.value,
+      field: e.target.name,
+      payload:
+        e.target.name === "pages" ? Number(e.target.value) : e.target.value,
     });
   }
 
   function handleOnSelect(e) {
     dispatch({
       type: "HANDLE_SELECT",
-      payload: e.target.value,
+      payload: Number(e.target.value),
     });
   }
 
@@ -29,26 +29,32 @@ const BookForm = ({ onHandleSubmit, dispatch }) => {
   return (
     <Form className="mt-1" onSubmit={handleOnSubmit}>
       <Form.Group className="mb-2">
+        <Form.Label>Book Name</Form.Label>
         <Form.Control
           type="text"
           name="title"
           placeholder="Enter Title"
+          value={state.title}
           onChange={(e) => handleTextChange(e)}
         />
       </Form.Group>
       <Form.Group className="mb-2">
+        <Form.Label>Author Name</Form.Label>
         <Form.Control
           type="text"
           name="author"
+          value={state.author}
           placeholder="Enter Author's Name"
           onChange={(e) => handleTextChange(e)}
         />
       </Form.Group>
       <Form.Group className="mb-2">
+        <Form.Label>Pages</Form.Label>
         <Form.Control
           type="number"
           name="pages"
           min={0}
+          value={state.pages}
           placeholder="Enter book pages"
           onChange={(e) => handleTextChange(e)}
         />
@@ -59,9 +65,9 @@ const BookForm = ({ onHandleSubmit, dispatch }) => {
           aria-label="Default select example"
           onChange={(e) => handleOnSelect(e)}
         >
-          {BOOK_SELECT_OPTION.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.context}
+          {BOOK_STATUS.map((option, index) => (
+            <option key={index} value={index}>
+              {option}
             </option>
           ))}
         </Form.Select>
@@ -71,6 +77,7 @@ const BookForm = ({ onHandleSubmit, dispatch }) => {
 };
 
 BookForm.propTypes = {
+  state: PropTypes.object.isRequired,
   onHandleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
 };

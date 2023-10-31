@@ -1,10 +1,11 @@
-import PropTypes from "prop-types";
-
+import { useSelector } from "react-redux";
 import { Table } from "react-bootstrap";
 import BookTableHead from "./BookTableHead";
 import BookTableBody from "./BookTableBody";
 
-const BookList = ({ books }) => {
+const BookList = () => {
+  const books = useSelector((state) => state.books.bookList);
+
   if (!books.length) {
     return (
       <section className="card my-4">
@@ -23,10 +24,6 @@ const BookList = ({ books }) => {
       </div>
     </section>
   );
-};
-
-BookList.propTypes = {
-  books: PropTypes.array.isRequired,
 };
 
 export default BookList;

@@ -6,13 +6,13 @@ import { Button, Modal } from "react-bootstrap";
 
 import { add } from "../features/books/BookSlice";
 
-import BookForm from "./BookForm";
+import BookForm from "../features/books/BookForm";
 
 const initialFormState = {
   title: "",
   author: "",
   pages: 0,
-  option: 0,
+  status: 0,
 };
 
 const reducer = (state, action) => {
@@ -20,7 +20,7 @@ const reducer = (state, action) => {
     case "HANDLE_INPUT_TEXT":
       return { ...state, [action.field]: action.payload };
     case "HANDLE_SELECT":
-      return { ...state, option: action.payload };
+      return { ...state, status: action.payload };
     default:
       return state;
   }
@@ -32,7 +32,7 @@ const ModalContainer = ({ closeModal, show }) => {
   const reduxDispatch = useDispatch();
 
   function onHandleSubmit() {
-    console.log(state);
+    closeModal();
     reduxDispatch(add(state));
   }
 
@@ -47,7 +47,11 @@ const ModalContainer = ({ closeModal, show }) => {
         <Modal.Title id="contained-modal-title-vcenter">Add Book</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <BookForm onHandleSubmit={onHandleSubmit} dispatch={dispatch} />
+        <BookForm
+          onHandleSubmit={onHandleSubmit}
+          dispatch={dispatch}
+          state={state}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeModal}>
