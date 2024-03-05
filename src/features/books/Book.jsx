@@ -4,24 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDice, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Stack } from "react-bootstrap";
 
-import { useDispatch } from "react-redux";
-
-import { remove, update } from "./BookSlice";
-
 import { BOOK_STATUS } from "../../utils/books";
 
 const Book = ({ book }) => {
-  const reduxDispatch = useDispatch();
-
-  const handleRemoveBook = (id) => {
-    reduxDispatch(remove(id));
-  };
-
-  const handleUpdateBookStatus = () => {
-    const nextStatus = book.status === 2 ? 0 : book.status + 1;
-    reduxDispatch(update({ ...book, status: nextStatus }));
-  };
-
   return (
     <tr
       className={
@@ -41,18 +26,10 @@ const Book = ({ book }) => {
       <td className="bg-transparent">{BOOK_STATUS[book.status]}</td>
       <td className="bg-transparent">
         <Stack direction="horizontal" gap={1}>
-          <button
-            type="button"
-            className="btn btn-sm btn-warning"
-            onClick={handleUpdateBookStatus}
-          >
+          <button type="button" className="btn btn-sm btn-warning">
             <FontAwesomeIcon icon={faDice} /> Change status
           </button>
-          <button
-            type="button"
-            className="btn btn-sm btn-danger deletebtn"
-            onClick={() => handleRemoveBook(book.id)}
-          >
+          <button type="button" className="btn btn-sm btn-danger deletebtn">
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
         </Stack>

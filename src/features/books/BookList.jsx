@@ -1,11 +1,17 @@
-import { useSelector } from "react-redux";
-import { Table } from "react-bootstrap";
+import { Table, Spinner } from "react-bootstrap";
 import BookTableHead from "./BookTableHead";
 import BookTableBody from "./BookTableBody";
+import { useBooks } from "./useBooks";
 
 const BookList = () => {
-  const books = useSelector((state) => state.books.bookList);
+  const { isLoading, books, error } = useBooks();
+  if (isLoading) {
+    return <Spinner animation="grow" />;
+  }
 
+  if (error) {
+    return <p>failed {error.message}</p>;
+  }
   if (!books.length) {
     return (
       <section className="card my-4">

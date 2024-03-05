@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-const instance = axios.create({
-  baseURL: BASE_URL,
+const ServerClient = axios.create({
+  baseURL: SERVER_URL,
 });
 
-export default instance;
+export default ServerClient;

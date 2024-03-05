@@ -5,7 +5,14 @@
       "title": "demo title",
       "author": "demo-author",
       "pages": 30,
-      "status": 2
+      "status": 0
+    },
+    {
+      "title": "Book Name",
+      "author": "segsegsegse",
+      "pages": 7,
+      "status": 2,
+      "id": 2
     }
   ]
 }
