@@ -1,10 +1,8 @@
-import { Button } from "react-bootstrap";
-
 import Header from "../ui/Header";
-import ModalContainer from "./ModalContainer";
 import BookList from "../features/books/BookList";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "react-hot-toast";
+import AddBook from "../features/books/AddBook";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,12 +18,7 @@ function App() {
       <div className="main-container">
         <div className="container">
           <Header />
-          <div className="row">
-            <div className="col-md-4 offset-md-4">
-              <Button variant="primary">Add book</Button>
-              <ModalContainer />
-            </div>
-          </div>
+          <AddBook />
           <BookList />
         </div>
       </div>

@@ -3,7 +3,6 @@ import ServerClient from "../config/db";
 export const getBooks = async () => {
   try {
     const { data: books } = await ServerClient.get("books");
-    console.log(books);
     return books;
   } catch (error) {
     throw new Error("Failed to fetch books");
