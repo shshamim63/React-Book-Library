@@ -1,9 +1,32 @@
-# React + Vite
+# Book-Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple library web-based app where user can add books title, author name, number of pages and update current reading status.
 
-Currently, two official plugins are available:
+![Book Store](./public/bookstore.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# React-Book-Library
+## Technical tool
+
+- JavaScript
+- Html
+- CSS
+- Bootstrap
+- React Bootstrap
+- React Query
+- React
+
+## Setup
+
+Create a `.env` file as mention below:
+
+```
+VITE_SERVER_URL=http://localhost:8000/
+```
+
+In separate terminals perform the following commands:
+
+```sh
+# Terminal 1
+npm run server # this will start the json server
+# Terminal 2
+npm run dev # this will start the dev server
+```

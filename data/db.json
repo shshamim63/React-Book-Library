@@ -1,11 +1,18 @@
 {
   "books": [
     {
-      "title": "gsgesgse",
-      "author": "hdrhshdrhd",
-      "pages": 0,
-      "status": 0,
+      "title": "You Don't Know JS",
+      "author": "Kyle Simpson",
+      "pages": 98,
+      "status": 2,
       "id": 1
+    },
+    {
+      "title": "JavaScript: The Definitive Guide",
+      "author": "David Flanagan",
+      "pages": 706,
+      "status": 0,
+      "id": 2
     }
   ]
 }
