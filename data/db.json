@@ -1,32 +1,3 @@
 {
-  "books": [
-    {
-      "id": 1,
-      "title": "demo title",
-      "author": "demo-author",
-      "pages": 30,
-      "status": 0
-    },
-    {
-      "title": "Book Name",
-      "author": "segsegsegse",
-      "pages": 7,
-      "status": 2,
-      "id": 2
-    },
-    {
-      "title": "Gamer",
-      "author": "Demo gamer",
-      "pages": "10",
-      "status": "0",
-      "id": 3
-    },
-    {
-      "title": "ddhdrhd",
-      "author": "ddhfftjjf",
-      "pages": 5,
-      "status": "0",
-      "id": 4
-    }
-  ]
+  "books": []
 }

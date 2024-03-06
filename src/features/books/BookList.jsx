@@ -1,4 +1,4 @@
-import { Table, Spinner } from "react-bootstrap";
+import { Table, Spinner, Container } from "react-bootstrap";
 import BookTableHead from "./BookTableHead";
 import BookTableBody from "./BookTableBody";
 import { useBooks } from "./useBooks";
@@ -14,9 +14,9 @@ const BookList = () => {
   }
   if (!books.length) {
     return (
-      <section className="card my-4">
+      <Container className="d-flex justify-content-center bg-info h-10">
         <p className="m-auto">Please add some books</p>
-      </section>
+      </Container>
     );
   }
 

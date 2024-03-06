@@ -5,8 +5,15 @@ import { faDice, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Stack } from "react-bootstrap";
 
 import { BOOK_STATUS } from "../../utils/books";
+import { useDeleteBook } from "./useDeleteBook";
 
 const Book = ({ book }) => {
+  const { deleteBook, isDeleteing } = useDeleteBook();
+
+  const handleDeleteBook = () => {
+    deleteBook(book.id);
+  };
+
   return (
     <tr
       className={
@@ -26,10 +33,19 @@ const Book = ({ book }) => {
       <td className="bg-transparent">{BOOK_STATUS[book.status]}</td>
       <td className="bg-transparent">
         <Stack direction="horizontal" gap={1}>
-          <button type="button" className="btn btn-sm btn-warning">
+          <button
+            type="button"
+            className="btn btn-sm btn-warning"
+            disabled={isDeleteing}
+          >
             <FontAwesomeIcon icon={faDice} /> Change status
           </button>
-          <button type="button" className="btn btn-sm btn-danger deletebtn">
+          <button
+            type="button"
+            className="btn btn-sm btn-danger deletebtn"
+            disabled={isDeleteing}
+            onClick={handleDeleteBook}
+          >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
         </Stack>

@@ -21,3 +21,12 @@ export const createBooks = async (book) => {
     throw new Error("Failed to create Book");
   }
 };
+
+export const deleteBook = async (id) => {
+  try {
+    const data = await ServerClient.delete(`books/${id}`);
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to delete a book with id: ${id}`);
+  }
+};
