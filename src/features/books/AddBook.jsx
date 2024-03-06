@@ -27,7 +27,7 @@ const AddBook = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <CreateBookForm />
+            <CreateBookForm handleClose={handleClose} />
           </Modal.Body>
         </Modal>
       </Col>

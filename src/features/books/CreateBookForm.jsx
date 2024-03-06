@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 
 import { BOOK_STATUS } from "../../utils/books";
 import { useForm } from "react-hook-form";
@@ -9,34 +9,46 @@ import FormRow from "../../ui/FormRow";
 import { useCreateBook } from "./useCreateBook";
 
 const CreateBookForm = ({ handleClose }) => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const { createBook, isCreating } = useCreateBook();
 
   const onSubmit = (data) => {
-    createBook(data, { onSuccess: () => { } });
+    console.log(data);
+    createBook(data, {
+      onSuccess: () => {
+        reset();
+        handleClose();
+      },
+    });
   };
 
   return (
     <Form className="mt-1" onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label="Book Name">
+      <FormRow label="Book Name" error={errors.title}>
         <Form.Control
           type="text"
-          {...register("Book Title", { required: true })}
+          {...register("title", { required: true })}
           placeholder="Book Title"
         />
       </FormRow>
-      <FormRow label="Author Name">
+      <FormRow label="Author Name" error={errors.author}>
         <Form.Control
           type="text"
           {...register("author", { required: true })}
           placeholder="Author's Name"
         />
       </FormRow>
-      <FormRow label="Pages">
+      <FormRow label="Pages" error={errors.pages}>
         <Form.Control
           type="number"
-          min={0}
-          {...register("pages", { min: 0 })}
+          {...register("pages", {
+            min: { value: 0, message: "Pages must have positive number" },
+          })}
         />
       </FormRow>
       <FormRow label="Book Read Status">
@@ -51,20 +63,19 @@ const CreateBookForm = ({ handleClose }) => {
           ))}
         </Form.Select>
       </FormRow>
-      <FormRow>
+      <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
         <Button variant="primary" disabled={isCreating} type="submit">
           Add
         </Button>
-      </FormRow>
+      </Modal.Footer>
     </Form>
   );
 };
 
 CreateBookForm.propTypes = {
-  state: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 

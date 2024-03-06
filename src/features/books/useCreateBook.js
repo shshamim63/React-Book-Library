@@ -8,7 +8,7 @@ export const useCreateBook = () => {
   const { mutate: createBook, isLoading: isCreating } = useMutation({
     mutationFn: createCabinApi,
     onSuccess: () => {
-      toast.success("created new book");
+      toast.success("Successfully created new book");
       queryClient.invalidateQueries({
         queryKey: ["books"],
       });

@@ -11,7 +11,11 @@ export const getBooks = async () => {
 
 export const createBooks = async (book) => {
   try {
-    const data = await ServerClient.post("books", book);
+    const data = await ServerClient.post("books", {
+      ...book,
+      pages: Number(book.pages) ?? 0,
+      status: Number(book.status) ?? 0,
+    });
     return data;
   } catch (error) {
     throw new Error("Failed to create Book");
