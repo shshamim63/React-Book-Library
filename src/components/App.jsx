@@ -1,54 +1,47 @@
-import { useState } from "react";
+import Header from "../ui/Header";
+import BookList from "../features/books/BookList";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "react-hot-toast";
+import AddBook from "../features/books/AddBook";
 
-import { Button } from "react-bootstrap";
-
-import Header from "./Header";
-import ModalContainer from "./ModalContainer";
-import BookList from "./BookList";
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+    },
+  },
+});
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "demo title",
-      author: "demo-author",
-      pages: 30,
-      status: 1,
-    },
-  ]);
-
-  function openModal() {
-    setShowModal(true);
-  }
-
-  function closeModal() {
-    setShowModal(false);
-  }
-
-  function addBook(book) {
-    setBooks(book);
-  }
-
   return (
-    <div className="main-container">
-      <div className="container">
-        <Header />
-        <div className="row">
-          <div className="col-md-4 offset-md-4">
-            <Button variant="primary" onClick={openModal}>
-              Add book
-            </Button>
-            <ModalContainer
-              show={showModal}
-              closeModal={closeModal}
-              addBook={addBook}
-            />
-          </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="main-container">
+        <div className="container">
+          <Header />
+          <AddBook />
+          <BookList />
         </div>
-        <BookList books={books} />
       </div>
-    </div>
+      <Toaster
+        position="bottom-right"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "white",
+          },
+        }}
+      />
+    </QueryClientProvider>
   );
 }
 
