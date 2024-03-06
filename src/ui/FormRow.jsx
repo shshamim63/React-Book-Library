@@ -7,7 +7,9 @@ const FormRow = ({ label, children, error }) => {
       {label && <Form.Label>{label}</Form.Label>}
       {children}
       {error && (
-        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+        <p className="text-danger">
+          <small>{error}</small>
+        </p>
       )}
     </Form.Group>
   );

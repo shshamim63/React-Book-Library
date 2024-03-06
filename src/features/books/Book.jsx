@@ -6,12 +6,24 @@ import { Stack } from "react-bootstrap";
 
 import { BOOK_STATUS } from "../../utils/books";
 import { useDeleteBook } from "./useDeleteBook";
+import { useUpdateBookStatus } from "./useUpdateBook";
 
 const Book = ({ book }) => {
   const { deleteBook, isDeleteing } = useDeleteBook();
+  const { updateBookStatus, isUpdating } = useUpdateBookStatus();
+
+  const isLoading = isDeleteing || isUpdating;
 
   const handleDeleteBook = () => {
     deleteBook(book.id);
+  };
+
+  const handleUpdateBookStatus = () => {
+    const updateData = {
+      ...book,
+      status: book.status === BOOK_STATUS.length - 1 ? 0 : book.status + 1,
+    };
+    updateBookStatus({ id: book.id, data: updateData });
   };
 
   return (
@@ -36,14 +48,15 @@ const Book = ({ book }) => {
           <button
             type="button"
             className="btn btn-sm btn-warning"
-            disabled={isDeleteing}
+            disabled={isLoading}
+            onClick={handleUpdateBookStatus}
           >
             <FontAwesomeIcon icon={faDice} /> Change status
           </button>
           <button
             type="button"
             className="btn btn-sm btn-danger deletebtn"
-            disabled={isDeleteing}
+            disabled={isLoading}
             onClick={handleDeleteBook}
           >
             <FontAwesomeIcon icon={faTrashCan} />

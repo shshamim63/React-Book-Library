@@ -30,3 +30,12 @@ export const deleteBook = async (id) => {
     throw new Error(`Failed to delete a book with id: ${id}`);
   }
 };
+
+export const updateBookStatus = async (id, book) => {
+  try {
+    const data = await ServerClient.put(`books/${id}`, book);
+    return data;
+  } catch (error) {
+    throw new Error("Failed to update status");
+  }
+};

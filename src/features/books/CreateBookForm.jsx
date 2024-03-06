@@ -9,16 +9,13 @@ import FormRow from "../../ui/FormRow";
 import { useCreateBook } from "./useCreateBook";
 
 const CreateBookForm = ({ handleClose }) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm();
+
+  const { errors } = formState;
+
   const { createBook, isCreating } = useCreateBook();
 
   const onSubmit = (data) => {
-    console.log(data);
     createBook(data, {
       onSuccess: () => {
         reset();
@@ -29,23 +26,28 @@ const CreateBookForm = ({ handleClose }) => {
 
   return (
     <Form className="mt-1" onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label="Book Name" error={errors.title}>
+      <FormRow label="Book Name" error={errors?.title?.message}>
         <Form.Control
           type="text"
-          {...register("title", { required: true })}
+          name="title"
+          {...register("title", { required: "Title is required" })}
           placeholder="Book Title"
         />
       </FormRow>
-      <FormRow label="Author Name" error={errors.author}>
+      <FormRow label="Author Name" error={errors?.author?.message}>
         <Form.Control
           type="text"
-          {...register("author", { required: true })}
+          name="author"
+          {...register("author", { required: "Author name is required" })}
           placeholder="Author's Name"
         />
       </FormRow>
-      <FormRow label="Pages" error={errors.pages}>
+      <FormRow label="Pages" error={errors?.pages?.message}>
         <Form.Control
           type="number"
+          name="pages"
+          defaultValue={0}
+          min={0}
           {...register("pages", {
             min: { value: 0, message: "Pages must have positive number" },
           })}

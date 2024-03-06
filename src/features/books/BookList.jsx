@@ -15,7 +15,9 @@ const BookList = () => {
   if (!books.length) {
     return (
       <Container className="d-flex justify-content-center bg-info h-10">
-        <p className="m-auto">Please add some books</p>
+        <p className="m-auto" style={{ height: "40px", lineHeight: 2.5 }}>
+          Please add some books
+        </p>
       </Container>
     );
   }

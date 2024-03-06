@@ -1,4 +1,4 @@
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 
 import CreateBookForm from "./CreateBookForm";
 import { useState } from "react";
@@ -11,10 +11,12 @@ const AddBook = () => {
 
   return (
     <Row>
-      <Col md={{ span: 4, offset: 4 }}>
+      <Container className="d-flex justify-content-center mb-3">
         <Button variant="primary" onClick={handleOpen}>
           Add book
         </Button>
+      </Container>
+      <Col md={{ span: 4, offset: 4 }}>
         <Modal
           show={show}
           aria-labelledby="contained-modal-title-vcenter"
